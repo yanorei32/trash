@@ -39,7 +39,10 @@
 				const secE = document.getElementById('sec');
 				const minE = document.getElementById('min');
 				const timerE = document.getElementById('timer');
+				const audioCtx = new AudioContext();
+
 				let time, intervalId = -1;
+
 
 				const strPadding = (str, width, c = ' ') => {
 					str += '';
@@ -73,9 +76,14 @@
 					if (!isFirstTime) --time;
 					timerE.textContent = sec2str(time);
 					if (time <= 0) {
-						alert('Done');
 						clearIntervalF();
 						updateUIStatus();
+						const osc = audioCtx.createOscillator();
+						osc.connect(audioCtx.destination);
+						osc.frequency.value = 1760;
+						osc.type = 'sine';
+						osc.start();
+						setTimeout(() => {osc.stop();}, 750);
 					}
 				};
 

@@ -69,8 +69,9 @@
 					intervalId = -1;
 				};
 
-				const interval = () => {
-					timerE.textContent = sec2str(--time);
+				const interval = (isFirstTime) => {
+					if (!isFirstTime) --time;
+					timerE.textContent = sec2str(time);
 					if (time <= 0) {
 						alert('Done');
 						clearIntervalF();
@@ -82,7 +83,7 @@
 					time = parseInt(secE.value) + ( parseInt(minE.value) * 60 ) + ( parseInt(hourE.value) * (60 * 60) );
 					intervalId = setInterval(interval, 1000);
 					updateUIStatus();
-					interval();
+					interval(true);
 				});
 
 				stopE.addEventListener('click', () => {

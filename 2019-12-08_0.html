@@ -1,0 +1,47 @@
+<html lang=C>
+	<head>
+		<meta charset=utf-8>
+	</head>
+	<body>
+		<h1>Benchmark</h1>
+		<p id=benchmarkElement>[Update here]</p>
+		<p>Previous Δt = <span id=deltaTime>null</span></p>
+		<button onclick='updateSuperSlow()'>SuperSlow</button>
+		<button onclick='updateSlow()'>Slow</button>
+		<button onclick='updateFast()'>Fast</button>
+		<script>
+			const BATCH_SIZE = 10000;
+			const deltaTimeE = document.getElementById('deltaTime');
+			const benchmarkE = document.getElementById('benchmarkElement');
+			function getBenchmarkElement() {
+				return document.getElementById('benchmarkElement');
+			}
+			const updateSuperSlow = () => {
+				const beginTime = new Date();
+				for (let i = 0;i <= BATCH_SIZE; ++i) {
+					getBenchmarkElement().innerText = i;
+					getBenchmarkElement().innerText;
+				}
+				deltaTimeE.textContent = (new Date()) - beginTime + ' ms';
+			};
+			const updateSlow = () => {
+				const beginTime = new Date();
+				console.time('x');
+				for (let i = 0;i <= BATCH_SIZE; ++i) {
+					document.getElementById('benchmarkElement').innerText = i;
+					document.getElementById('benchmarkElement').innerText;
+				}
+				deltaTimeE.textContent = (new Date()) - beginTime + ' ms';
+			};
+			const updateFast = () => {
+				const beginTime = new Date();
+				for (let i = 0;i <= BATCH_SIZE; ++i) {
+					benchmarkE.innerText = i;
+					benchmarkE.innerText;
+				}
+				deltaTimeE.textContent = (new Date()) - beginTime + ' ms';
+			};
+		</script>
+	</body>
+</html>
+

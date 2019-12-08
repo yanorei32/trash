@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang=en>
+	<head>
+		<meta charset=UTF-8>
+		<title>Timer</title>
+		<meta name=viewport content='width=device-width, initial-scale=1.0'>
+		<style>
+			body, html {
+				width: 100%;
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			.container {
+				width: 300px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class=container>
+			<h1 id=timer>00:00:00</h1>
+			<p>
+				<label>Hour: <input type=number min=0 id=hour value=0 style=width:30px></label>
+				<label>Min: <input type=number min=0 id=min value=0 style=width:30px></label>
+				<label>Sec: <input type=number min=0 id=sec value=0 style=width:30px></label>
+			</p>
+			<p>
+				<button id=start>Start</button>
+				<button id=stop disabled=disabled>Stop</button>
+			</p>
+		</div>
+		<script>
+			(function() {
+				const startE = document.getElementById('start');
+				const stopE = document.getElementById('stop');
+				const hourE = document.getElementById('hour');
+				const secE = document.getElementById('sec');
+				const minE = document.getElementById('min');
+				const timerE = document.getElementById('timer');
+				let time, intervalId = -1;
+
+				const strPadding = (str, width, c = ' ') => {
+					str += '';
+					while (str.length < width) str = c + str;
+					return str;
+				};
+
+				const sec2str = (sec) => {
+					const calcedHour = Math.floor(sec / (60 * 60)) % (60 * 60);
+					const calcedMin = Math.floor(sec / 60) % 60;
+					const calcedSec = sec % 60;
+					return `${strPadding(calcedHour, 2, '0')}:${strPadding(calcedMin, 2, '0')}:${strPadding(calcedSec, 2, '0')}`;
+				};
+
+				const updateUIStatus = () => {
+					if (intervalId == -1) {
+						hourE.disabled = minE.disabled = secE.disabled = startE.disabled = '';
+						stopE.disabled = 'disabled';
+					} else {
+						hourE.disabled = minE.disabled = secE.disabled = startE.disabled = 'disabled';
+						stopE.disabled = '';
+					}
+				};
+
+				const clearIntervalF = () => {
+					clearInterval(intervalId);
+					intervalId = -1;
+				};
+
+				const interval = () => {
+					timerE.textContent = sec2str(--time);
+					if (time <= 0) {
+						alert('Done');
+						clearIntervalF();
+						updateUIStatus();
+					}
+				};
+
+				startE.addEventListener('click', () => {
+					time = parseInt(secE.value) + ( parseInt(minE.value) * 60 ) + ( parseInt(hourE.value) * (60 * 60) );
+					intervalId = setInterval(interval, 1000);
+					updateUIStatus();
+					interval();
+				});
+
+				stopE.addEventListener('click', () => {
+					clearIntervalF();
+					updateUIStatus();
+				});
+			})();
+		</script>
+	</body>
+</html>
+

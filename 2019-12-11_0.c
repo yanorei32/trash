@@ -3,7 +3,7 @@
 
 void printAsBin(char x) {
 	char i;
-	for(i=CHAR_BIT-1;i>0;--i)
+	for(i=CHAR_BIT-1;i>=0;--i)
 		putchar('0'+!!(x&(1<<i)));
 	putchar('\n');
 }

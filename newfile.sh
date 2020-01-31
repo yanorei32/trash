@@ -15,5 +15,7 @@ while : ; do
 	NUM=$(( NUM + 1 ))
 done
 
+echo New file openned: $FILENAME
+
 vim $FILENAME
 

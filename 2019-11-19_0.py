@@ -29,7 +29,7 @@ def main():
     deltaTime = time.time() - begin
     sys.stdout.write('\n')
     sys.stdout.flush()
-    print(f'Done ({tryCounter} chars printed. Δt={deltaTime} sec)')
+    print(f'Done ({tryCounter} chars printed. Δt={deltaTime:.3f} sec. {tryCounter/deltaTime:.1f} chars/sec)')
 
 if __name__ == '__main__':
     main()

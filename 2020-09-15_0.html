@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			(function() {
+				let css = "";
+				css += "<style>\n";
+				css += "  @keyframes gaming {\n";
+
+				for (let h = 0; h <= 360; h++) {
+					css += `    ${h / 360.0 * 100}% {\n`;
+					css += `      background-color: hsla(${h}, 100%, 50%);\n`;
+					css += `    }\n`;
+				}
+
+				css += "  }\n";
+				css += "</style>\n";
+
+				document.write(css);
+			})();
+		</script>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+				border: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			div {
+				animation-name: gaming;
+				animation-duration: 5s;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+	</body>
+</html>
+

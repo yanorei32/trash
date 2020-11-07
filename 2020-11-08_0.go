@@ -20,8 +20,8 @@ func formatLrc(d time.Duration) string {
 }
 
 func main() {
-	if len(os.Args) < 4 {
-		log.Fatal("go run 2020-11-08_0.go [BPM] [LIMIT] [OFFSET]")
+	if len(os.Args) != 5 {
+		log.Fatal("go run 2020-11-08_0.go [BPM] [BEAT_PER_BAR] [LIMIT] [OFFSET]")
 	}
 
 	bpm, err := strconv.Atoi(os.Args[1])
@@ -29,12 +29,17 @@ func main() {
 		log.Fatal("Failed to parse BPM")
 	}
 
-	limit, err := time.ParseDuration(os.Args[2])
+	bpb, err := strconv.Atoi(os.Args[2])
+	if err != nil {
+		log.Fatal("Failed to parse beat per bar")
+	}
+
+	limit, err := time.ParseDuration(os.Args[3])
 	if err != nil {
 		log.Fatal("Failed to parse LIMIT")
 	}
 
-	offset, err := time.ParseDuration(os.Args[3])
+	offset, err := time.ParseDuration(os.Args[4])
 	if err != nil {
 		log.Fatal("Failed to parse OFFSET")
 	}
@@ -48,7 +53,7 @@ func main() {
 			os.Exit(0)
 		}
 
-		fmt.Println(formatLrc(pos))
+		fmt.Printf("%s %d: %d/%d\n", formatLrc(pos), tick / bpb + 1, tick % bpb + 1, bpb)
 
 		tick += 1
 	}

@@ -53,7 +53,7 @@ func main() {
 			os.Exit(0)
 		}
 
-		fmt.Printf("%s %d: %d/%d\n", formatLrc(pos), tick / bpb + 1, tick % bpb + 1, bpb)
+		fmt.Printf("%s %3d: %2d/%2d \n", formatLrc(pos), tick / bpb + 1, tick % bpb + 1, bpb)
 
 		tick += 1
 	}

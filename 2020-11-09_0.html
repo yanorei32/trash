@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+	<body>
+		<div id=video0></div>
+		<div id=lyric0></div>
+
+		<script src=https://www.youtube.com/iframe_api></script>
+		<script>
+			function instanciate(vid, tag, lyric) {
+				let p = new YT.Player('video', {
+					videoId: 'ES2sOiTCdZY',
+					events: {
+						'onReady': () => {
+							setInterval(() => {
+								console.log(p.getCurrentTime())
+							}, 100);
+						}
+					}
+				});
+			}
+
+			function onYouTubeIframeAPIReady() {
+			}
+		</script>
+	</body>
+</html>
+

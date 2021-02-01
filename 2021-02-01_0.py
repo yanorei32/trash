@@ -1,10 +1,6 @@
 import re
 
 
-def custom_function(s):
-    print("custom function: " + s)
-
-
 def process_string(s, f):
     loop_match = re.search(r'\[(?P<start>\d+)\.\.(?P<end>\d+)\]', s)
 
@@ -22,7 +18,7 @@ def process_string(s, f):
 
 
 def main():
-    process_string('a[0..10]/b[0..3]', custom_function)
+    process_string('a[0..10]/b[0..3]', print)
 
 
 if __name__ == '__main__':

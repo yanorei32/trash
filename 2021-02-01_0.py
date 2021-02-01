@@ -2,19 +2,17 @@ import re
 
 
 def process_string(s, f):
-    loop_match = re.search(r'\[(?P<start>\d+)\.\.(?P<end>\d+)\]', s)
+    m = re.search(r'\[(?P<start>\d+)\.\.(?P<end>\d+)\]', s)
 
-    if loop_match is None:
+    if m is None:
         f(s)
         return
 
-    loop_start = int(loop_match.group('start'))
-    loop_stop = int(loop_match.group('end'))
-
-    span = loop_match.span()
-
-    for i in range(loop_start, loop_stop):
-        process_string(s[:span[0]] + str(i) + s[span[1]:], f)
+    for i in range(int(m.group('start'), int(m.group('stop')):
+        process_string(
+            '{head}[{i}]{tail}',
+            head=s[:m.span()[0]], i=i, tail=s[m.span()[1]:],
+        )
 
 
 def main():

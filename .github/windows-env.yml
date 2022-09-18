@@ -1,0 +1,16 @@
+name: "windows env"
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  windowsenv:
+    name: "windowsenv"
+    runs-on: "windows-2022"
+
+    steps:
+      - run: |
+          cd c:/windows/microsoft.net/framework/
+          dir csc.exe /s /p

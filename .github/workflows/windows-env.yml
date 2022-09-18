@@ -11,6 +11,13 @@ jobs:
     runs-on: "windows-2022"
 
     steps:
+      - name: set up Cygwin
+        uses: egor-tensin/setup-cygwin@v3
+        with:
+          platform: x64
+
+
       - run: |
           cd c:/windows/microsoft.net/framework/
           Get-ChildItem -Path . -Include csc.exe -File -Recurse
+          uname

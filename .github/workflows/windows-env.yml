@@ -16,7 +16,6 @@ jobs:
         with:
           platform: x64
 
-
       - run: |
           cd c:/windows/microsoft.net/framework/
           Get-ChildItem -Path . -Include csc.exe -File -Recurse
